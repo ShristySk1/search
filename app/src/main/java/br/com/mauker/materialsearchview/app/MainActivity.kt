@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                return false
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         val clickListener = object: MaterialSearchView.OnHistoryItemClickListener {
             override fun onClick(history: History) {
-                searchView.setQuery(history.query, false)
+                searchView.setQuery(history.query, true)
             }
 
             override fun onLongClick(history: History) {
