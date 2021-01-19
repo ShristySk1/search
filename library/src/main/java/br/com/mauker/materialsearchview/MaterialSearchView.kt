@@ -267,7 +267,9 @@ class MaterialSearchView @JvmOverloads constructor(
         mSuggestionsRecyclerView = mRoot.findViewById(R.id.suggestion_list)
 
         // Set click listeners
-        mBack.setOnClickListener { closeSearch() }
+        mBack.setOnClickListener {
+            (context as Activity).finish()
+             }
         mVoice.setOnClickListener { onVoiceClicked() }
         mClear.setOnClickListener { onClearClicked() }
         mTintView.setOnClickListener {
@@ -367,7 +369,8 @@ class MaterialSearchView @JvmOverloads constructor(
             setSearchBarHeight(appCompatActionBarHeight)
         }
         if (typedArray.hasValue(R.styleable.MaterialSearchView_voiceHintPrompt)) {
-            setVoiceHintPrompt(typedArray.getString(R.styleable.MaterialSearchView_voiceHintPrompt) ?: EMPTY_STRING)
+            setVoiceHintPrompt(typedArray.getString(R.styleable.MaterialSearchView_voiceHintPrompt)
+                    ?: EMPTY_STRING)
         } else {
             setVoiceHintPrompt(mContext.getString(R.string.hint_prompt))
         }
@@ -866,7 +869,7 @@ class MaterialSearchView @JvmOverloads constructor(
     }
 
     fun setOnVoiceClickedListener(listener: () -> Unit) {
-        setOnVoiceClickedListener(object: OnVoiceClickedListener {
+        setOnVoiceClickedListener(object : OnVoiceClickedListener {
             override fun onVoiceClicked() {
                 listener.invoke()
             }
@@ -881,7 +884,7 @@ class MaterialSearchView @JvmOverloads constructor(
     }
 
     fun setOnClearClickListener(listener: () -> Unit) {
-        setOnClearClickListener(object: OnClearTextClickListener {
+        setOnClearClickListener(object : OnClearTextClickListener {
             override fun onClearClicked() {
                 listener.invoke()
             }
