@@ -268,8 +268,8 @@ class MaterialSearchView @JvmOverloads constructor(
 
         // Set click listeners
         mBack.setOnClickListener {
-            (context as Activity).finish()
-             }
+            closeSearch()
+        }
         mVoice.setOnClickListener { onVoiceClicked() }
         mClear.setOnClickListener { onClearClicked() }
         mTintView.setOnClickListener {
@@ -281,12 +281,12 @@ class MaterialSearchView @JvmOverloads constructor(
         // Initialize the search view.
         initSearchView()
 
-        val listener = object: OnHistoryItemClickListener {
+        val listener = object : OnHistoryItemClickListener {
             override fun onClick(history: History) {
                 setQuery(query = history.query, shouldSubmit = true)
             }
 
-            override fun onLongClick(history: History) { }
+            override fun onLongClick(history: History) {}
         }
 
         adapter = SearchAdapter(mutableListOf(), listener)
@@ -1011,7 +1011,7 @@ class MaterialSearchView @JvmOverloads constructor(
     @Synchronized
     private fun doFiltering(query: String) {
         CoroutineScope(IO).launch {
-            val filtered =  if (query.isBlank()) {
+            val filtered = if (query.isBlank()) {
                 historyDAO.getDefaultHistoryWithPin(MAX_HISTORY, MAX_PINNED)
             } else {
                 historyDAO.getFilteredHistory(query)
