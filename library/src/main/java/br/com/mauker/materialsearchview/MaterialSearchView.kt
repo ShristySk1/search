@@ -579,7 +579,7 @@ class MaterialSearchView @JvmOverloads constructor(
 
             // If we don't have a listener, or if the search view handled the query, close it.
             // TODO - Improve.
-            if (mOnQueryTextListener?.onQueryTextSubmit(query.toString()) == false) {
+            if (mOnQueryTextListener?.onQueryTextSubmit(query.toString()) == true) {
                 if (mShouldKeepHistory) {
                     saveQueryToDb(query.toString(), Calendar.getInstance())
                 }
